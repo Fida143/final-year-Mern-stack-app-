@@ -7,7 +7,7 @@ import AuthRoute from "./routes/auth.js";
 import CategoryRoute from "./routes/category.js";
 import ProductRoute from "./routes/product.js";
 import cors from "cors";
-// import path from "path";
+ import path from "path";
 
 // cofig env
 const app = express();
@@ -24,7 +24,7 @@ connectDB();
 app.use(cors());
 app.use(json());
 app.use(morgan("dev"));
-// app.use(express.static(path.join(__dirname, "../frontend/build")));
+app.use(express.static(path.join(__dirname, "../frontend/build")));
 
 // routers
 app.use("/api/v1/auth", AuthRoute);
@@ -32,13 +32,13 @@ app.use("/api/v1/category", CategoryRoute);
 app.use("/api/v1/product", ProductRoute);
 
 // rest api
-// app.get("/", (req, res) => {
-//   res.send("welcome to ecommerce website");
-// });
+app.get("/", (req, res) => {
+  res.send("welcome to ecommerce website");
+});
 
-// app.use("*", function (req, res) {
-//   res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
-// });
+app.use("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
+});
 
 // port
 const PORT = process.env.PORT || 8080;
